@@ -388,7 +388,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Seleccionar Foto"/>
+        <Property name="text" type="java.lang.String" value="Seleccionar Foto gaaaaaaaaaaa"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
