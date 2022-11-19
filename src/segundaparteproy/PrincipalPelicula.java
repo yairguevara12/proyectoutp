@@ -270,7 +270,7 @@ public class PrincipalPelicula extends javax.swing.JFrame {
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo.jpg"))); // NOI18N
 
-        jButton1.setText("Seleccionar Archivo");
+        jButton1.setText("Seleccionar Foto");
 
         jLabel10.setText("Imagen");
 
