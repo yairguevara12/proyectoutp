@@ -6,6 +6,7 @@ package segundaparteproy;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import javax.swing.RowFilter;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Queue;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -29,7 +31,7 @@ public class PrincipalPelicula extends javax.swing.JFrame {
     public Deque<Pelicula> ListPelicula; 
     //instanciamos
     ColaLinkedList colaList = new ColaLinkedList();
-    
+    List<Pelicula> pruebaPelicula = new ArrayList<>();
     //Filtro es para busacar 
     /*private TableRowSorter trsfiltro;
     String filtro;*/
@@ -70,7 +72,7 @@ public class PrincipalPelicula extends javax.swing.JFrame {
            return pelicula;
         } else {
             //System.err.println("Pelicula no encontrado");
-            Pelicula PeliculaVacia = new Pelicula(0, "", 0, "", "", "");
+            Pelicula PeliculaVacia = new Pelicula(0, "", 0, "", "", "", "");
             return PeliculaVacia;
         }
     }
@@ -105,7 +107,7 @@ public class PrincipalPelicula extends javax.swing.JFrame {
         }else
         {
             //System.err.println("Pelicula no encontrado");
-             Pelicula PeliculaVacia = new Pelicula(0, "", 0, "","","");
+             Pelicula PeliculaVacia = new Pelicula(0, "", 0, "","","", "");
             return PeliculaVacia;
         }
     }
@@ -125,7 +127,8 @@ public class PrincipalPelicula extends javax.swing.JFrame {
             String clasificacion = peliculita.getClasificacion();
             String duracion = peliculita.getDuracion();
             String resolucion = peliculita.getResolucion();    
-            Object[] data = {codigo, nombre, año, clasificacion, duracion, resolucion};
+            String imagen = peliculita.getImagen(); 
+            Object[] data = {codigo, nombre, año, clasificacion, duracion, resolucion, imagen};
             //se agrega en un fila
             model.addRow(data);
         }
@@ -174,6 +177,7 @@ public class PrincipalPelicula extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        imagenDireccion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 14)); // NOI18N
@@ -219,11 +223,11 @@ public class PrincipalPelicula extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Nombre", "Año", "Clasificacion", "Duracion", "Resolucion"
+                "Codigo", "Nombre", "Año", "Clasificacion", "Duracion", "Resolucion", "Imagen"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -271,8 +275,15 @@ public class PrincipalPelicula extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo.jpg"))); // NOI18N
 
         jButton1.setText("Seleccionar Foto gaaaaaaaaaaa");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Imagen");
+
+        imagenDireccion.setText("...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -307,7 +318,7 @@ public class PrincipalPelicula extends javax.swing.JFrame {
                                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                         .addComponent(txtResolucion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
                                                         .addComponent(txtDuracion, javax.swing.GroupLayout.Alignment.LEADING))
-                                                    .addComponent(jButton1)))
+                                                    .addComponent(imagenDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -319,10 +330,16 @@ public class PrincipalPelicula extends javax.swing.JFrame {
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                     .addComponent(txtAño)
                                                     .addComponent(txtClasificacion, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(1, 1, 1)
+                                                .addComponent(jButton1)
+                                                .addGap(0, 0, Short.MAX_VALUE))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(5, 5, 5)
                                         .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -330,7 +347,7 @@ public class PrincipalPelicula extends javax.swing.JFrame {
                                         .addComponent(btnBuscarPalabra)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnAlquilar)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(12, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -379,9 +396,11 @@ public class PrincipalPelicula extends javax.swing.JFrame {
                             .addComponent(txtResolucion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jLabel10))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton1)
+                                .addComponent(jLabel10))
+                            .addComponent(imagenDireccion, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -406,13 +425,14 @@ public class PrincipalPelicula extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         //Pelicula pelicula = new Pelicula();
         int codigo, año;
-        String nombre, clasificacion, duracion, resolucion;
+        String nombre, clasificacion, duracion, resolucion, imagen;
         int index = 1;
         int actualSize = 0;
         
         if(txtCodigo.getText().trim().isEmpty() || txtNombre.getText().trim().isEmpty() || txtAño.getText().trim().isEmpty()
                 || txtClasificacion.getText().trim().isEmpty() || txtDuracion.getText().trim().isEmpty() || 
-                txtResolucion.getText().trim().isEmpty()){
+                txtResolucion.getText().trim().isEmpty() || 
+                imagenDireccion.getText().trim().isEmpty()){
             javax.swing.JOptionPane.showMessageDialog(null, "Hay campos vacios");
         }else{
             
@@ -422,6 +442,7 @@ public class PrincipalPelicula extends javax.swing.JFrame {
             clasificacion = txtClasificacion.getText();
             duracion = txtDuracion.getText();
             resolucion = txtResolucion.getText();
+            imagen = imagenDireccion.getText();
 
             Pelicula pelicula = new Pelicula();
             pelicula.setCodigo(codigo);
@@ -430,11 +451,15 @@ public class PrincipalPelicula extends javax.swing.JFrame {
             pelicula.setClasificacion(clasificacion);
             pelicula.setDuracion(duracion);
             pelicula.setResolucion(resolucion);
+            pelicula.setImagen(imagen);
 
             this.colaList.deque(pelicula);
 
             this.ListPelicula = this.colaList.returnListElements();
+            this.pruebaPelicula.add(pelicula);
         }
+        
+        
         
         limpiar();
         listar();
@@ -555,6 +580,18 @@ public class PrincipalPelicula extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnAlquilarActionPerformed
 
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        File archivo;
+        JFileChooser seleccionarArchivo;
+        seleccionarArchivo = new JFileChooser();
+        seleccionarArchivo.showOpenDialog(null);
+        archivo = seleccionarArchivo.getSelectedFile();
+        imagenDireccion.setText(seleccionarArchivo.getCurrentDirectory().toString());
+        System.out.println("el arrchivo seleccionado es: " + archivo);
+        System.out.println("Path actual: " + seleccionarArchivo.getCurrentDirectory());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -596,6 +633,7 @@ public class PrincipalPelicula extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarPalabra;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnListar;
+    private javax.swing.JLabel imagenDireccion;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

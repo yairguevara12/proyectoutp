@@ -12,16 +12,18 @@ public class Pelicula  implements Comparable<Pelicula>{
     String clasificacion;
     String duracion;
     String resolucion;
+    String imagen;
     
    
     
-    public Pelicula(int codigo, String nombre, int año, String clasificacion, String duracion, String resolucion) {
+    public Pelicula(int codigo, String nombre, int año, String clasificacion, String duracion, String resolucion, String imagen) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.año = año;
         this.clasificacion = clasificacion;
         this.duracion = duracion;
         this.resolucion = resolucion;
+        this.imagen = imagen;
     }
 
     public Pelicula() {
@@ -73,6 +75,14 @@ public class Pelicula  implements Comparable<Pelicula>{
 
     public void setResolucion(String resolucion) {
         this.resolucion = resolucion;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
     @Override
     public int compareTo(Pelicula comparePelicula) {
