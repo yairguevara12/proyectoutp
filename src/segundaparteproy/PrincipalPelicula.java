@@ -10,6 +10,7 @@ import java.io.File;
 import javax.swing.RowFilter;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -29,6 +30,7 @@ import segundaparteproy.Pelicula;
 public class PrincipalPelicula extends javax.swing.JFrame {
     //usamos pilas.
     public Deque<Pelicula> ListPelicula; 
+    public Hashtable<Integer, Pelicula> hashTablePelicula = new Hashtable<>();
     //instanciamos
     ColaLinkedList colaList = new ColaLinkedList();
     List<Pelicula> pruebaPelicula = new ArrayList<>();
@@ -44,6 +46,8 @@ public class PrincipalPelicula extends javax.swing.JFrame {
         ListPelicula = new LinkedList<>();
         //No aparece
         btnDelete.setVisible(false);
+        this.añadirPeliculas();
+     
     }
     
     
@@ -52,7 +56,7 @@ public class PrincipalPelicula extends javax.swing.JFrame {
 
         //DefaultTableModel get_table = (DefaultTableModel) table_student.getModel();
         //   int user_dni = Integer.parseInt(get_table.getValueAt(selected_row, selected_column).toString());
-        PanelPeliculas editing_user = new PanelPeliculas(this, rootPaneCheckingEnabled, (ArrayList<Pelicula>) this.pruebaPelicula);
+        PanelPeliculas editing_user = new PanelPeliculas(this, rootPaneCheckingEnabled, this.hashTablePelicula);
         editing_user.setModal(true);
         editing_user.setVisible(true);
 
@@ -148,6 +152,7 @@ public class PrincipalPelicula extends javax.swing.JFrame {
             //se agrega en un fila
             model.addRow(data);
         }
+        
     }
     
     public void limpiar(){
@@ -158,7 +163,11 @@ public class PrincipalPelicula extends javax.swing.JFrame {
         txtDuracion.setText("");
         txtResolucion.setText("");
     }
-    
+    private void AgregarHash(Pelicula pelicula){
+        
+       this.hashTablePelicula.put(pelicula.getCode(), pelicula);
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -449,7 +458,105 @@ public class PrincipalPelicula extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+    public void añadirPeliculas(){
+        //Pelicula pelicula = new Pelicula();
+        int codigo, año;
+        String nombre, clasificacion, duracion, resolucion, imagen;
+        
+        
+              Pelicula pelicula1 = new Pelicula();
+        pelicula1.setCodigo(1);
+        pelicula1.setNombre("Nemo");
+        pelicula1.setAño(2011);
+        pelicula1.setClasificacion("APT");
+        pelicula1.setDuracion("2H 5MIN");
+        pelicula1.setResolucion("4K");
+        pelicula1.setImagen("C:\\Users\\joxhe\\OneDrive\\Documentos\\NetBeansProjects\\proyectoutp\\src\\imagenesPeliculas\\nemo.jpg");
 
+        Pelicula pelicula2 = new Pelicula();
+        pelicula2.setCodigo(2);
+        pelicula2.setNombre("Dory");
+        pelicula2.setAño(2012);
+        pelicula2.setClasificacion("APT");
+        pelicula2.setDuracion("1H 45MIN");
+        pelicula2.setResolucion("4K");
+        pelicula2.setImagen("C:\\Users\\joxhe\\OneDrive\\Documentos\\NetBeansProjects\\proyectoutp\\src\\imagenesPeliculas\\dory.jpg");
+
+        Pelicula pelicula3 = new Pelicula();
+        pelicula3.setCodigo(3);
+        pelicula3.setNombre("La Llorona");
+        pelicula3.setAño(2009);
+        pelicula3.setClasificacion("+18");
+        pelicula3.setDuracion("2H 25MIN");
+        pelicula3.setResolucion("HD");
+        pelicula3.setImagen("C:\\Users\\joxhe\\OneDrive\\Documentos\\NetBeansProjects\\proyectoutp\\src\\imagenesPeliculas\\lallorona.jpg");
+        
+        Pelicula pelicula4 = new Pelicula();
+        pelicula4.setCodigo(4);
+        pelicula4.setNombre("Chuky");
+        pelicula4.setAño(2007);
+        pelicula4.setClasificacion("+18");
+        pelicula4.setDuracion("2H 15MIN");
+        pelicula4.setResolucion("HD");
+        pelicula4.setImagen("C:\\Users\\joxhe\\OneDrive\\Documentos\\NetBeansProjects\\proyectoutp\\src\\imagenesPeliculas\\chuky.jpg");
+        
+        Pelicula pelicula5 = new Pelicula();
+        pelicula5.setCodigo(5);
+        pelicula5.setNombre("Asu mare");
+        pelicula5.setAño(2007);
+        pelicula5.setClasificacion("APT");
+        pelicula5.setDuracion("1H 45MIN");
+        pelicula5.setResolucion("HD");
+        pelicula5.setImagen("C:\\Users\\joxhe\\OneDrive\\Documentos\\NetBeansProjects\\proyectoutp\\src\\imagenesPeliculas\\asu mare.jpg");
+        
+        Pelicula pelicula6 = new Pelicula();
+        pelicula6.setCodigo(6);
+        pelicula6.setNombre("Thor");
+        pelicula6.setAño(2018);
+        pelicula6.setClasificacion("+18");
+        pelicula6.setDuracion("2H 5MIN");
+        pelicula6.setResolucion("HD");
+        pelicula6.setImagen("C:\\Users\\joxhe\\OneDrive\\Documentos\\NetBeansProjects\\proyectoutp\\src\\imagenesPeliculas\\thor.jpg");
+        
+        Pelicula pelicula7 = new Pelicula();
+        pelicula7.setCodigo(7);
+        pelicula7.setNombre("Los Increibles");
+        pelicula7.setAño(2009);
+        pelicula7.setClasificacion("APT");
+        pelicula7.setDuracion("2H 00MIN");
+        pelicula7.setResolucion("HD");
+        pelicula7.setImagen("C:\\Users\\joxhe\\OneDrive\\Documentos\\NetBeansProjects\\proyectoutp\\src\\imagenesPeliculas\\losincreibles.jpg");
+        
+        Pelicula pelicula8 = new Pelicula();
+        pelicula8.setCodigo(8);
+        pelicula8.setNombre("Corazon de padre");
+        pelicula8.setAño(2009);
+        pelicula8.setClasificacion("APT");
+        pelicula8.setDuracion("1H 30MIN");
+        pelicula8.setResolucion("HD");
+        pelicula8.setImagen("C:\\Users\\joxhe\\OneDrive\\Documentos\\NetBeansProjects\\proyectoutp\\src\\imagenesPeliculas\\corazon.jpg");
+        
+        this.colaList.deque(pelicula1);
+        this.colaList.deque(pelicula2);
+        this.colaList.deque(pelicula3);
+        this.colaList.deque(pelicula4);
+        this.colaList.deque(pelicula5);
+        this.colaList.deque(pelicula6);
+        this.colaList.deque(pelicula7);
+        this.colaList.deque(pelicula8);     
+        
+        this.ListPelicula = this.colaList.returnListElements();
+        //this.pruebaPelicula.add(pelicula);
+        AgregarHash(pelicula1);
+        AgregarHash(pelicula2);
+        AgregarHash(pelicula3);
+        AgregarHash(pelicula4);
+        AgregarHash(pelicula5);
+        AgregarHash(pelicula6);
+        AgregarHash(pelicula7);
+        AgregarHash(pelicula8);  
+        
+    }
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         //Pelicula pelicula = new Pelicula();
         int codigo, año;
@@ -484,11 +591,10 @@ public class PrincipalPelicula extends javax.swing.JFrame {
             this.colaList.deque(pelicula);
 
             this.ListPelicula = this.colaList.returnListElements();
-            this.pruebaPelicula.add(pelicula);
+            //this.pruebaPelicula.add(pelicula);
+            AgregarHash(pelicula);
         }
-        
-        
-        
+               
         limpiar();
         listar();
         txtCodigo.requestFocus();
@@ -615,7 +721,7 @@ public class PrincipalPelicula extends javax.swing.JFrame {
         seleccionarArchivo = new JFileChooser();
         seleccionarArchivo.showOpenDialog(null);
         archivo = seleccionarArchivo.getSelectedFile();
-        imagenDireccion.setText(seleccionarArchivo.getCurrentDirectory().toString());
+        imagenDireccion.setText(archivo.toString());
         System.out.println("el arrchivo seleccionado es: " + archivo);
         System.out.println("Path actual: " + seleccionarArchivo.getCurrentDirectory());
     }//GEN-LAST:event_jButton1ActionPerformed

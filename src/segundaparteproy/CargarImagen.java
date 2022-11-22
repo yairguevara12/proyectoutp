@@ -31,7 +31,7 @@ public class CargarImagen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jFileChooser2.setCurrentDirectory(new java.io.File("C:\\Users\\joxhe\\OneDrive\\Documentos\\ImagenesProy"));
+        jFileChooser2.setCurrentDirectory(new java.io.File("C:\\Users\\joxhe\\OneDrive\\Documentos\\NetBeansProjects\\proyectoutp\\src\\imagenesPeliculas"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

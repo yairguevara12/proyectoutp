@@ -84,6 +84,33 @@ public class Pelicula  implements Comparable<Pelicula>{
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
+    
+     @Override
+    public String toString() {
+        return "Student{" + "code=" + codigo + ", nombre=" + nombre + ", año=" + año + '}';
+    }
+    
+    public int hashNumber() {
+        String textString = (codigo + nombre + año );
+        return textString.hashCode();
+    }
+    
+    public String hashString() {
+        String textString = (codigo + nombre + año );
+        return "PL00" + textString.hashCode();
+    }
+
+    public int getCode() {
+        return this.hashNumber();
+    }
+
+    public void setCode() {
+        this.codigo = this.toString().hashCode();
+    }
+    
+    
+    
+    
     @Override
     public int compareTo(Pelicula comparePelicula) {
         int compareCodigo = ((Pelicula)comparePelicula). getCodigo();
